@@ -39,7 +39,7 @@
  * };
  */
 
-const connect = (root) => {
+const connectDFS = (root) => {
   if (root === null || root.left === null) {
     return root;
   }
@@ -50,5 +50,28 @@ const connect = (root) => {
   connect(root.left);
   connect(root.right);
 
+  return root;
+};
+
+const connectBFS = (root) => {
+  if (root === null) {
+    return root;
+  }
+  let queue = [root];
+
+  while (queue.length) {
+    let next = [];
+
+    while (queue.length) {
+      const node = queue.shift();
+      node.next = queue[0] || null;
+      
+      if (node.left !== null) {
+        next.push(node.left);
+        next.push(node.right);
+      }
+    }
+    queue = next;
+  }
   return root;
 };
