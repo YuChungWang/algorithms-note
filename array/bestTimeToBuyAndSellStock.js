@@ -28,16 +28,16 @@ const maxProfit = (prices) => {
   let maxProfit = 0;
   
   while (sell < prices.length) {
-      if (prices[sell] - prices[buy] > 0) {
-          if (prices[sell] - prices[buy] > maxProfit) {
-              maxProfit = prices[sell] - prices[buy];
-          }
-          
-          sell += 1;
-      } else {
-          buy += 1;
-          sell = buy + 1;
+    if (prices[sell] - prices[buy] > 0) {
+      if (prices[sell] - prices[buy] > maxProfit) {
+        maxProfit = prices[sell] - prices[buy];
       }
+        
+      sell += 1;
+    } else {
+      buy += 1;
+      sell = buy + 1;
+    }
   }
   
   return maxProfit;
