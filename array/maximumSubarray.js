@@ -24,11 +24,24 @@
 // Input: nums = [5,4,-1,7,8]
 // Output: 23
 
-const maxSubArray = (nums) => {
-  let currentMax = 0;
+// JS solution
+// const maxSubArray = (nums) => {
+//   let currentMax = 0;
 
-  return nums.reduce((acc, curr) => {
-    currentMax = Math.max(curr, currentMax + curr);
-    return Math.max(currentMax, acc);
-  }, nums[0]);
+//   return nums.reduce((acc, curr) => {
+//     currentMax = Math.max(curr, currentMax + curr);
+//     return Math.max(currentMax, acc);
+//   }, nums[0]);
+// };
+
+const maxSubArray = (nums) => {
+  let offset = 0;
+  let max = -Infinity;
+
+  for (let i = 0; i < nums.length; i++) {
+    offset = Math.max(offset + nums[i], nums[i]);
+    max = Math.max(max, offset);
+  }
+  
+  return max;
 };
