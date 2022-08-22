@@ -34,6 +34,7 @@
 //   }, nums[0]);
 // };
 
+// Kadane's algorithm (Dynamic Programming)
 const maxSubArray = (nums) => {
   let offset = 0;
   let max = -Infinity;
