@@ -26,7 +26,7 @@
 // Total amount you can rob = 2 + 9 + 1 = 12.
 
 const rob = (nums) => {
-  let cell =[ ...Array(nums.length)].fill(null);
+  let cell =[...Array(nums.length)].fill(null);
   
   for (let i = 0; i < nums.length; i++) {
     if (i === 0) {
