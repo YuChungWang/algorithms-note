@@ -39,7 +39,7 @@ const characterReplacement = (s, k) => {
       longestCount = Math.max(count, longestCount);
     } else {
       memo.set(s[left], memo.get(s[left]) - 1);
-      left +=1;
+      left += 1;
     }
   }
 

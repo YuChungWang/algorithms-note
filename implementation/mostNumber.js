@@ -51,4 +51,4 @@ const solution = (a) => {
   }
   
   return output;
-}
+};

@@ -1,3 +1,5 @@
+// code signal
+
 // You are implementing your own programming language and you've decided to add support for merging strings.
 // A typical merge function would take two strings s1 and s2, and return the lexicographically smallest result
 // that can be obtained by placing the symbols of s2 between the symbols of s1 in such a way that maintains the
