@@ -34,7 +34,6 @@
 // 2.
 const rotate = (matrix) => {
   transpose(matrix);
-  console.log(matrix);
   reflect(matrix);
   return matrix;
 };

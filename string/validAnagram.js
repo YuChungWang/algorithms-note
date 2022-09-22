@@ -39,7 +39,7 @@ const isAnagram = (s, t) => {
     }
   }
   
-  for (let value of [...memoS.keys()]) {
+  for (let value of memoS.keys()) {
     if (memoS.get(value) !== memoT.get(value)) {
       return false;
     }
