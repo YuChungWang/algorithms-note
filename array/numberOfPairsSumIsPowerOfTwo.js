@@ -53,7 +53,6 @@ const solution = (nums) => {
   for (const num of nums) {
     map.set(num, (map.get(nums) || 0) + 1);
   }
-  console.log(map);
 
   for (let i = 0; i < 31; i++) {
     const val = 2 ** i;
