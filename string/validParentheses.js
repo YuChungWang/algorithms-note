@@ -26,58 +26,33 @@
 // Output: false
 
 const isValid = (s) => {
-  const arr = s.split('');
-  let i = 0;
-  let j = 0;
-  let k = 0;
-  let closeSymbolQueue = [];
-  let isPass = true;
-
-  arr.forEach((symbol) => {
-    if (!isPass) {
-      return;
-    } else if (
-      i < 0 ||
-      j < 0 ||
-      k < 0 ||
-      (
-        [')', '}', ']'].includes(symbol) &&
-        symbol !== closeSymbolQueue[0]
-      )
-    ) {
-      isPass = false;
-      return;
+  let stack = [];
+  
+  for (let c of s) {
+    if (['(', '{', '['].includes(c)) {
+      stack.push(c);
+    } else {
+      let startPair = '';
+      switch (c) {
+        case ')':
+          startPair = '(';
+          break;
+        case ']':
+          startPair = '[';
+          break;
+        case '}':
+          startPair = '{';
+          break;
+        default:
+          break;
+      }
+      if (stack[stack.length - 1] !== startPair) {
+        return false;
+      } else {
+        stack.pop();
+      }
     }
+  }
 
-    switch (symbol) {
-      case '(':
-        i += 1;
-        closeSymbolQueue.unshift(')');
-        break;
-      case ')':
-        i -= 1;
-        closeSymbolQueue.shift();
-        break;
-      case '[':
-        j += 1;
-        closeSymbolQueue.unshift(']');
-        break;
-      case ']':
-        j -= 1;
-        closeSymbolQueue.shift();
-        break;
-      case '{':
-        k += 1;
-        closeSymbolQueue.unshift('}');
-        break;
-      case '}':
-        k -= 1;
-        closeSymbolQueue.shift();
-        break;
-      default:
-        break;
-    }
-  });
-
-  return i === 0 && j === 0 && k === 0 && isPass;
+  return stack.length === 0;
 };
