@@ -61,6 +61,7 @@ const solution = (field, figure) => {
   
   const check = (oriRow, oriCol) => {
     const tempField = JSON.parse(JSON.stringify(field));
+
     for (let row = 0; row < figure.length; row++) {
       for (let col = 0; col < figure[0].length; col++) {
         if (
@@ -69,15 +70,19 @@ const solution = (field, figure) => {
         ) {
           return;
         }
-        tempField[oriRow - row][oriCol - col] = figure[row][col];
+        if (tempField[oriRow - 2 + row][oriCol + col] === 0) {
+          tempField[oriRow - 2 + row][oriCol + col] = figure[row][col];
+        }
       }
     }
     isChecked = true;
     
-    for (let row = oriRow; row >= oriRow - 3; row--) {
+    for (let row = oriRow; row >= oriRow - 2; row--) {
       let isFilled = true;
+      
       for (let col = 0; col < field[0].length; col++) {
         if (tempField[row][col] === 0) {
+          isFilled = false;
           break;
         }
       }
@@ -94,7 +99,7 @@ const solution = (field, figure) => {
       if (isChecked) {
         break;
       }
-      const oriCol = check(row, col);
+      const oriCol = check(row, col, field);
       if (oriCol >= 0) {
         return oriCol;
       }
