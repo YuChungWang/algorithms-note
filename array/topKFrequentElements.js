@@ -14,19 +14,40 @@
 // Input: nums = [1], k = 1
 // Output: [1]
 
+// const topKFrequent = (nums, k) => {
+//   let map = {};
+//   let output = [];
+  
+//   // calc num appear count
+//   // O(n)
+//   for (let num of nums) {
+//     map[num] = (map[num] || 0) + 1;
+//   }
+  
+//   // calc output;
+//   // O(nlogn)
+//   const sortedArr = Object.entries(map).sort((a, b) => b[1] - a[1]);
+
+//   for (let i = 0; i < k; i++) {
+//     output.push(sortedArr[i][0]);
+//   }
+  
+//   return output;
+// };
+
 const topKFrequent = (nums, k) => {
-  let map = {};
+  let map = new Map();
   let output = [];
   
   // calc num appear count
   // O(n)
   for (let num of nums) {
-    map[num] = (map[num] || 0) + 1;
+    map.set(num, (map.get(num) || 0) + 1);
   }
   
   // calc output;
   // O(nlogn)
-  const sortedArr = Object.entries(map).sort((a, b) => b[1] - a[1]);
+  const sortedArr = [...map.entries()].sort((a, b) => b[1] - a[1]);
 
   for (let i = 0; i < k; i++) {
     output.push(sortedArr[i][0]);
@@ -34,3 +55,5 @@ const topKFrequent = (nums, k) => {
   
   return output;
 };
+
+console.log(topKFrequent([1,1,1,2,2,3], 2));
