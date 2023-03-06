@@ -22,26 +22,48 @@
 // Explanation: Replace the one 'A' in the middle with 'B' and form "AABBBBA".
 // The substring "BBBB" has the longest repeating letters, which is 4.
 
+// const characterReplacement = (s, k) => {
+//   let memo = new Map();
+//   let left = 0;
+//   let count = 1;
+//   let longestCount = 1;
+
+//   for (let right = 0; right < s.length; right++) {
+//     if (!memo.get(s[right])) {
+//       memo.set(s[right], 0);
+//     }
+//     memo.set(s[right], memo.get(s[right]) + 1);
+
+//     count = right - left + 1;
+//     if (count - Math.max(...memo.values()) <= k) {
+//       longestCount = Math.max(count, longestCount);
+//     } else {
+//       memo.set(s[left], memo.get(s[left]) - 1);
+//       left += 1;
+//     }
+//   }
+
+//   return longestCount;
+// };
+
 const characterReplacement = (s, k) => {
-  let memo = new Map();
+  const map = [26];
+  let largestCount = 0;
   let left = 0;
-  let count = 1;
-  let longestCount = 1;
-
+  let maxLen = 0;
+  
   for (let right = 0; right < s.length; right++) {
-    if (!memo.get(s[right])) {
-      memo.set(s[right], 0);
-    }
-    memo.set(s[right], memo.get(s[right]) + 1);
+    const letter = s[right];
+    map[letter] = (map[letter] || 0) + 1;
+    largestCount = Math.max(map[letter], largestCount);
 
-    count = right - left + 1;
-    if (count - Math.max(...memo.values()) <= k) {
-      longestCount = Math.max(count, longestCount);
-    } else {
-      memo.set(s[left], memo.get(s[left]) - 1);
+    if (right - left + 1 - largestCount > k) {
+      map[s[left]] -= 1;
       left += 1;
     }
+
+    maxLen = Math.max(right - left + 1, maxLen);
   }
 
-  return longestCount;
+  return maxLen;
 };
