@@ -21,24 +21,28 @@
 // Output: [[1]]
 
 const permute = (nums) => {
-  let output = [];
-  dfs(nums, [], Array(nums.length).fill(false), output);
-  return output;
-};
+  const output = [];
 
-const dfs = (nums, path, used, output) => {
-  if (path.length === nums.length) {
-    output.push([...path]);
-    return;
-  }
-  
-  for (let i = 0; i < nums.length; i++) {
-    if (used[i]) continue;
-    
-    path.push(nums[i]);
-    used[i] = true;
-    dfs(nums, path, used, output);
-    path.pop();
-    used[i] = false;
-  }
+  const dfs = (subset, used) => {
+    if (subset.length === nums.length) {
+      output.push([...subset]);
+      return;
+    } else {
+      for (let i = 0; i < nums.length; i++) {
+        if (used[i]) {
+          continue;
+        }
+
+        subset.push(nums[i]);
+        used[i] = true;
+        dfs(subset, used);
+        subset.pop();
+        used[i] = false;
+      }
+    }
+  };
+
+  dfs([], Array(nums.length).fill(false));
+
+  return output;
 };
