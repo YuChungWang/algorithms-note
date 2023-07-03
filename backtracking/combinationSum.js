@@ -54,10 +54,15 @@ const combinationSum = (candidates, target) => {
     } else {
         const candidate = candidates[startIdx];
 
-        subset.push(candidate)
-        dfs(subset, sum + candidate, startIdx);
-        subset.pop(candidate)
-        dfs(subset, sum, startIdx + 1);
+        // subset.push(candidate)
+        // dfs(subset, sum + candidate, startIdx);
+        // subset.pop(candidate)
+        // dfs(subset, sum, startIdx + 1);
+
+      for (let i = startIdx; i < candidates.length; i++) {
+        const candidate = candidates[i];
+        dfs([...subset, candidate], sum + candidate, i);
+      }
     }
   };
 
