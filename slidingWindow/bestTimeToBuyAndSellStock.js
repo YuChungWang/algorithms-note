@@ -23,20 +23,14 @@
 // Explanation: In this case, no transactions are done and the max profit = 0.
 
 const maxProfit = (prices) => {
-  let buy = 0;
-  let sell = 1;
+  let left = 0;
   let maxProfit = 0;
   
-  while (sell < prices.length) {
-    if (prices[sell] - prices[buy] > 0) {
-      if (prices[sell] - prices[buy] > maxProfit) {
-        maxProfit = prices[sell] - prices[buy];
-      }
-        
-      sell += 1;
+  for (let right = 0; right < prices.length; right++) {
+    if (prices[left] > prices[right]) {
+      left = right;
     } else {
-      buy += 1;
-      sell = buy + 1;
+      maxProfit = Math.max(prices[right] - prices[left], maxProfit);
     }
   }
   
