@@ -34,6 +34,7 @@
 // 1 <= zero, one <= low
 
 const countGoodStrings = (low, high, zero, one) => {
+  const mod = 10**9 + 7;
   const memo = new Map();
 
   const dfs = (length) => {
@@ -44,11 +45,11 @@ const countGoodStrings = (low, high, zero, one) => {
       return memo.get(length);
     }
 
-    const res = length >= low ? 1 : 0;
-    const value = res + dfs(length + zero) + dfs(length + one);
-    memo.set(length, value);
+    let res = length >= low ? 1 : 0;
+    res += dfs(length + zero) + dfs(length + one);
+    memo.set(length, res);
 
-    return value;
+    return res % mod;
   };
 
   return dfs(0);
