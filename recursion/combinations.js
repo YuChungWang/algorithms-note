@@ -42,7 +42,10 @@ const combine = (n, k) => {
     return;
   };
   
-  comb(start = 1, currComb = []);
+  comb(1, []);
 
   return output;
 };
+
+console.log(combine(4, 2));
+console.log(combine(1, 1));
